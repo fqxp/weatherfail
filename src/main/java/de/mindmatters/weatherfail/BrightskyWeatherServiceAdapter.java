@@ -8,7 +8,8 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.ZonedDateTime;
 
-public class BrightskyWeatherServiceAdapter implements IWeatherServiceAdapter {
+@Component
+class BrightskyWeatherServiceAdapter extends WeatherServiceAdapter {
     public URI generateURL(double latitude, double longitude, LocalDate date) {
         String formattedDate = new SimpleDateFormat("yyyy-MM-dd").format(date);
         String uriString = String.format(

@@ -9,15 +9,15 @@ import org.junit.jupiter.api.Test;
 import java.io.IOException;
 import java.net.URI;
 import java.net.http.HttpResponse;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class WeatherServiceClientTest {
-    final static class FakeWeatherServiceAdapter implements IWeatherServiceAdapter {
+    final static class FakeWeatherServiceAdapter extends WeatherServiceAdapter {
         private final String hostName;
         private final int port;
 
@@ -26,8 +26,8 @@ class WeatherServiceClientTest {
             this.port = port;
         }
 
-        public URI generateURL(double latitude, double longitude, LocalDate date) {
-            String formattedDate = new SimpleDateFormat("yyyy-MM-dd").format(date);
+        public URI generateURL(double latitude, double longitude, LocalDate localDate) {
+            String formattedDate = localDate.format(DateTimeFormatter.ISO_LOCAL_DATE);
             String uriString = String.format(
                     "http://%s:%d/weather?lat=%f&long=%f&date=%s",
                     hostName, port, latitude, longitude, formattedDate
@@ -63,7 +63,9 @@ class WeatherServiceClientTest {
                 .addHeader("Content-Type", "application/json");
         mockWebServer.enqueue(mockResponse);
 
-        WeatherForecast result = client.retrieveForecast(12.34, 56.78,
+        WeatherForecast result = client.retrieveForecast(
+                12.34,
+                56.78,
                 LocalDate.of(2022, Calendar.SEPTEMBER, 6));
 
         assertEquals(ZonedDateTime.parse("2022-05-09T12:00:00+00:00"), result.getTimestamp());

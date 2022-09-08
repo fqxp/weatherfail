@@ -23,7 +23,7 @@ public class Application {
 
     @Bean
     public WeatherServiceClient getWeatherServiceClient() {
-        IWeatherServiceAdapter client = new BrightskyWeatherServiceAdapter();
+        WeatherServiceAdapter client = new BrightskyWeatherServiceAdapter();
         return new WeatherServiceClient(client);
     }
 }

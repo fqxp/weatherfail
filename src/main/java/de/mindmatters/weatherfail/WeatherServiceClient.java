@@ -10,16 +10,16 @@ import java.time.LocalDate;
 
 @Service
 public class WeatherServiceClient {
-    private final IWeatherServiceAdapter weatherServiceAdapter;
+    private final WeatherServiceAdapter weatherServiceAdapter;
 
-    public WeatherServiceClient(IWeatherServiceAdapter weatherServiceAdapter) {
+    public WeatherServiceClient(WeatherServiceAdapter weatherServiceAdapter) {
         this.weatherServiceAdapter = weatherServiceAdapter;
     }
 
-    public WeatherForecast retrieveForecast(double latitude, double longitude, LocalDate date) throws IOException, InterruptedException {
+    public WeatherForecast retrieveForecast(double latitude, double longitude, LocalDate localDate) throws IOException, InterruptedException {
         HttpClient client = HttpClient.newHttpClient();
         HttpRequest request = HttpRequest.newBuilder()
-                .uri(weatherServiceAdapter.generateURL(latitude, longitude, date))
+                .uri(weatherServiceAdapter.generateURL(latitude, longitude, localDate))
                 .build();
 
         HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
