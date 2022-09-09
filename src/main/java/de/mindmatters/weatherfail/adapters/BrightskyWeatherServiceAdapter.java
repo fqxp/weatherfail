@@ -1,5 +1,6 @@
-package de.mindmatters.weatherfail;
+package de.mindmatters.weatherfail.adapters;
 
+import de.mindmatters.weatherfail.WeatherForecast;
 import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

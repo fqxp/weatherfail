@@ -1,5 +1,8 @@
 package de.mindmatters.weatherfail;
 
+import de.mindmatters.weatherfail.adapters.BrightskyWeatherServiceAdapter;
+import de.mindmatters.weatherfail.adapters.FakeWeatherServiceAdapter;
+import de.mindmatters.weatherfail.adapters.WeatherServiceAdapter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,8 +19,8 @@ public class ScheduledRunner {
   private static final Logger logger = LoggerFactory.getLogger(ScheduledRunner.class);
 
   private static final Set<WeatherServiceAdapter> adapters = Set.of( // <-- Set.of und List.of geben dir immutable collections und sind ganz praktisch
-          new BrightskyWeatherServiceAdapter()
-          // new AnotherWeatherServiceAdapter(), <-- hier kämen andere Adapter rein
+          new BrightskyWeatherServiceAdapter(),
+          new FakeWeatherServiceAdapter()
   );
 
   private final WeatherServiceClient client;

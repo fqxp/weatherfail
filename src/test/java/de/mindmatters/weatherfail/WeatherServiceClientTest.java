@@ -1,5 +1,6 @@
 package de.mindmatters.weatherfail;
 
+import de.mindmatters.weatherfail.adapters.WeatherServiceAdapter;
 import okhttp3.mockwebserver.MockResponse;
 import okhttp3.mockwebserver.MockWebServer;
 import org.junit.jupiter.api.AfterAll;
