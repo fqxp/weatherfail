@@ -1,0 +1,10 @@
+# Eigene properties müssen für tests in /src/TEST/resources/application.[yml|properties] liegen und werden
+# NICHT wenn fehlend aus der normalen geholt. Immer wieder eine Stolperfalle für Fehler wie
+# `Caused by: java.lang.IllegalArgumentException: Could not resolve placeholder 'weatherfail.location.latitude' in value "${weatherfail.location.latitude}"`
+
+weatherfail:
+  location:
+    latitude: 53.5
+    longitude: 10
+  runner:
+    cron: '0 0 0 1 1 0'

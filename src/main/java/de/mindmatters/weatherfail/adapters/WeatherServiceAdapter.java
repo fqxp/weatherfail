@@ -1,4 +1,6 @@
-package de.mindmatters.weatherfail;
+package de.mindmatters.weatherfail.adapters;
+
+import de.mindmatters.weatherfail.WeatherForecast;
 
 import java.net.URI;
 import java.net.http.HttpResponse;
