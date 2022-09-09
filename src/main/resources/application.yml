@@ -1,0 +1,18 @@
+weatherfail:
+  location:
+    latitude: 53.5
+    longitude: 10
+
+  runner:
+    cron: '0 * * * * *'
+
+# es folgen default props aus spring boot, ne gute Quelle für Properties die es so gibt ist das hier:
+# https://docs.spring.io/spring-boot/docs/current/reference/html/application-properties.html
+
+logging:
+  level:
+    root: WARN
+    de.mindmatters: INFO
+
+server:
+  port: 8081
