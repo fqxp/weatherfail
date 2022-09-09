@@ -17,7 +17,7 @@ public class ScheduledRunner {
 
   private static final Set<WeatherServiceAdapter> adapters = Set.of( // <-- Set.of und List.of geben dir immutable collections und sind ganz praktisch
           new BrightskyWeatherServiceAdapter()
-//          new AnotherWeatherServiceAdapter(), <-- hier kämen andere Adapter rein
+          // new AnotherWeatherServiceAdapter(), <-- hier kämen andere Adapter rein
   );
 
   private final WeatherServiceClient client;
