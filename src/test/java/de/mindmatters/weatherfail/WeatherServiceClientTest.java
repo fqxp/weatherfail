@@ -5,6 +5,8 @@ import okhttp3.mockwebserver.MockWebServer;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
 
 import java.io.IOException;
 import java.net.URI;
@@ -44,13 +46,13 @@ class WeatherServiceClientTest {
     public static MockWebServer mockWebServer;
 
     @BeforeAll
-    static void setUp() throws IOException {
+    public static void setUp() throws IOException {
         mockWebServer = new MockWebServer();
         mockWebServer.start();
     }
 
     @AfterAll
-    static void tearDown() throws IOException {
+    public static void tearDown() throws IOException {
         mockWebServer.shutdown();
     }
 

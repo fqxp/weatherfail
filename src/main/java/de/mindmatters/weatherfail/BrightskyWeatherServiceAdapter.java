@@ -1,18 +1,21 @@
 package de.mindmatters.weatherfail;
 
 import org.json.JSONObject;
+import org.springframework.stereotype.Component;
 
 import java.net.URI;
 import java.net.http.HttpResponse;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Locale;
 
 @Component
 class BrightskyWeatherServiceAdapter extends WeatherServiceAdapter {
     public URI generateURL(double latitude, double longitude, LocalDate date) {
-        String formattedDate = new SimpleDateFormat("yyyy-MM-dd").format(date);
+        String formattedDate = date.format(DateTimeFormatter.ISO_LOCAL_DATE);
         String uriString = String.format(
+                Locale.US,
                 "https://api.brightsky.dev/weather?lat=%f&lon=%f&date=%s&tz=Europe/Berlin",
                 latitude, longitude, formattedDate
         );

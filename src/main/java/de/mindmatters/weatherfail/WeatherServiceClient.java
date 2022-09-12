@@ -17,12 +17,13 @@ public class WeatherServiceClient {
     }
 
     public WeatherForecast retrieveForecast(double latitude, double longitude, LocalDate localDate) throws IOException, InterruptedException {
-        HttpClient client = HttpClient.newHttpClient();
-        HttpRequest request = HttpRequest.newBuilder()
-                .uri(weatherServiceAdapter.generateURL(latitude, longitude, localDate))
+        var client = HttpClient.newHttpClient();
+        var uri = weatherServiceAdapter.generateURL(latitude, longitude, localDate);
+        var request = HttpRequest.newBuilder()
+                .uri(uri)
                 .build();
 
-        HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+        var response = client.send(request, HttpResponse.BodyHandlers.ofString());
 
         return weatherServiceAdapter.parseWeatherForecast(response);
     }
