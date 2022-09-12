@@ -10,17 +10,9 @@ spring:
         jdbc:
           time_zone: UTC
 
-server:
-  port: 8081
-
-logger:
-  level:
-    root: WARN
-    de.mindmatters: DEBUG
-
 weatherfail:
   location:
     latitude: 53.5623857
     longitude: 9.9595470
   runner:
-    cron: "0 * * * * *"
+    cron: "-"
