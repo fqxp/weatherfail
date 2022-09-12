@@ -17,8 +17,8 @@ class BrightskyWeatherServiceAdapter extends WeatherServiceAdapter {
     private static final Logger logger = LoggerFactory.getLogger(BrightskyWeatherServiceAdapter.class);
 
     public URI generateURL(double latitude, double longitude, LocalDate date) {
-        String formattedDate = date.format(DateTimeFormatter.ISO_LOCAL_DATE);
-        String uri = String.format(
+        var formattedDate = date.format(DateTimeFormatter.ISO_LOCAL_DATE);
+        var uri = String.format(
                 Locale.US,
                 "https://api.brightsky.dev/weather?lat=%f&lon=%f&date=%s&tz=Europe/Berlin",
                 latitude, longitude, formattedDate
@@ -35,7 +35,7 @@ class BrightskyWeatherServiceAdapter extends WeatherServiceAdapter {
         var jo = new JSONObject(response.body());
         var weather = jo.getJSONArray("weather").getJSONObject(0);
         var timestamp = ZonedDateTime.parse(weather.getString("timestamp"));
-        double temperature = weather.getDouble("temperature");
+        var temperature = weather.getDouble("temperature");
 
         return new WeatherForecast(timestamp, temperature);
     }

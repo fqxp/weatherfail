@@ -22,7 +22,7 @@ public class Application {
     public CommandLineRunner commandLineRunner(WeatherServiceAdapter adapter, WeatherServiceClient client, WeatherForecastRepository repository) {
         return args -> {
             System.out.println("Retrieving weather forecast ...");
-            WeatherForecast forecast = client.retrieveForecast(adapter, LocalDate.now());
+            var forecast = client.retrieveForecast(adapter, LocalDate.now());
             System.out.printf("Temperature forecast at %s: %.2f C\n", forecast.getTimestamp(), forecast.getTemperature());
 
             repository.save(forecast);
