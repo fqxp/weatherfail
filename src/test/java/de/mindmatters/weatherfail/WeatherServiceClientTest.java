@@ -18,7 +18,16 @@ import java.util.Calendar;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+@SpringBootTest
 class WeatherServiceClientTest {
+    private static MockWebServer mockWebServer;
+    private final WeatherServiceClient client;
+
+    @Autowired
+    public WeatherServiceClientTest(WeatherServiceClient client) {
+        this.client = client;
+    }
+
     final static class FakeWeatherServiceAdapter extends WeatherServiceAdapter {
         private final String hostName;
         private final int port;
@@ -43,8 +52,6 @@ class WeatherServiceClientTest {
         }
     }
 
-    public static MockWebServer mockWebServer;
-
     @BeforeAll
     public static void setUp() throws IOException {
         mockWebServer = new MockWebServer();
@@ -58,17 +65,15 @@ class WeatherServiceClientTest {
 
     @Test
     void retrieveForecast_parsesWeatherServiceResponseIntoWeatherForecastModel() throws InterruptedException, IOException {
-        var fakeWeatherServiceAdapter = new FakeWeatherServiceAdapter(mockWebServer.getHostName(), mockWebServer.getPort());
-        var client = new WeatherServiceClient(fakeWeatherServiceAdapter);
+        var adapter = new FakeWeatherServiceAdapter(mockWebServer.getHostName(), mockWebServer.getPort());
+        var client = new WeatherServiceClient();
         var mockResponse = new MockResponse()
                 .setBody("{}")
                 .addHeader("Content-Type", "application/json");
         mockWebServer.enqueue(mockResponse);
+        var date = LocalDate.of(2022, Calendar.SEPTEMBER, 6);
 
-        WeatherForecast result = client.retrieveForecast(
-                12.34,
-                56.78,
-                LocalDate.of(2022, Calendar.SEPTEMBER, 6));
+        WeatherForecast result = client.retrieveForecast(adapter, date);
 
         assertEquals(ZonedDateTime.parse("2022-05-09T12:00:00+00:00"), result.getTimestamp());
         assertEquals(32.0, result.getTemperature());
