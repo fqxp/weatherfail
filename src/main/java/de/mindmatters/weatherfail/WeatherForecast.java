@@ -19,9 +19,6 @@ public class WeatherForecast {
     private ZonedDateTime timestamp;
     private double temperature;
 
-    protected WeatherForecast() {
-    }
-
     public WeatherForecast(ZonedDateTime timestamp, double temperature) {
         this.timestamp = timestamp;
         this.temperature = temperature;

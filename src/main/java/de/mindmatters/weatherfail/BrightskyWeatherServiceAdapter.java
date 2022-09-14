@@ -29,7 +29,7 @@ class BrightskyWeatherServiceAdapter extends WeatherServiceAdapter {
         return URI.create(uri);
     }
 
-    public WeatherForecast parseWeatherForecast(HttpResponse<String> response) {
+    public Result parseWeatherForecast(HttpResponse<String> response) {
         logger.debug("parsing response: %s".formatted(response));
 
         var jo = new JSONObject(response.body());
@@ -37,6 +37,6 @@ class BrightskyWeatherServiceAdapter extends WeatherServiceAdapter {
         var timestamp = ZonedDateTime.parse(weather.getString("timestamp"));
         var temperature = weather.getDouble("temperature");
 
-        return new WeatherForecast(timestamp, temperature);
+        return new Result(timestamp, temperature);
     }
 }

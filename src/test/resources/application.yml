@@ -11,8 +11,5 @@ spring:
           time_zone: UTC
 
 weatherfail:
-  location:
-    latitude: 53.5623857
-    longitude: 9.9595470
   runner:
     cron: "-"

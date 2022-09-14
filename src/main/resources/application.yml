@@ -18,9 +18,6 @@ logger:
     root: WARN
     de.mindmatters: DEBUG
 
-weatherfail:
-  location:
-    latitude: 53.5623857
-    longitude: 9.9595470
+1weatherfail:
   runner:
     cron: "0 * * * * *"
