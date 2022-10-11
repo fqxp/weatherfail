@@ -30,3 +30,14 @@ dependencies {
 tasks.named('test') {
     useJUnitPlatform()
 }
+
+flyway {
+    url = 'jdbc:postgresql://localhost:5435/weatherfail'
+    user = 'user'
+    password = 'password'
+    schemas = ['public']
+    placeholders = [
+            'keyABC'          : 'valueXYZ',
+            'otherplaceholder': 'value123'
+    ]
+}
